@@ -23,3 +23,11 @@ const business =  [
         website: ""
     }
 ]
+
+const review = [
+    {
+        star: "",
+        price: "", 
+        review: ""
+    }
+]
