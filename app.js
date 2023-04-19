@@ -31,3 +31,11 @@ const review = [
         review: ""
     }
 ]
+
+const photo = [
+    {
+        file: "",
+        caption: ""
+    }
+]
+
