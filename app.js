@@ -10,6 +10,8 @@ app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
 
+
+// Businesses
 const business =  [
     {
         name: "",
@@ -24,6 +26,12 @@ const business =  [
     }
 ]
 
+// Businesses Functions
+app.get('/business', (req, res, next) => {
+    res.status(200).send("Hello world");
+});
+
+// Reviews
 const review = [
     {
         star: "",
@@ -32,6 +40,12 @@ const review = [
     }
 ]
 
+// Reviews Functions
+app.get('/review', (req, res, next) => {
+    res.status(200).send("Hello world");
+});
+
+// Photos
 const photo = [
     {
         file: "",
@@ -39,3 +53,7 @@ const photo = [
     }
 ]
 
+// Photos Functions
+app.get('/photo', (req, res, next) => {
+    res.status(200).send("Hello world");
+});
