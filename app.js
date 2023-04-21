@@ -86,14 +86,14 @@ app.get('/business/:businessID', (req, res, next) => {
 });
 
 // Endpoint to update info on a single Business
-app.put('/business/:businessID', function (req, res, next) {
+app.put('/business/:businessID', (req, res, next) => {
     var businessID = parseInt(req.params.businessID);
     if (business[businessID]) {
         if (req.body && req.body.name) {
-            lodgings[lodgingID] = req.body;
+            business[businessID] = req.body;
             res.status(200).json({
             links: {
-            lodging: '/lodgings/' + lodgingID
+            business: '/business/' + businessID
             }
         });
         } else {
@@ -106,6 +106,18 @@ app.put('/business/:businessID', function (req, res, next) {
     }
 });
 
+// Endpoint to delete a specified business
+app.delete(
+    '/business/:businessID', (req, res, next) => {
+        var businessID = parseInt(req.params.businessID);
+        if (business[businessID]) {
+            business[businessID] = null;
+            res.status(204).end();
+        } else {
+            next();
+        }
+    }
+  );
 
 
 // Reviews
