@@ -26,7 +26,7 @@ const business =  [
     }
 ]
 
-// Businesses API endpoint 
+// Businesses API endpoints
 app.get('/business', (req, res) => {
     var page = parseInt(req.query.page) || 1;
     var numPerPage = 10;
@@ -55,6 +55,7 @@ app.get('/business', (req, res) => {
     });
 });
 
+// Create new business
 app.use(express.json());
 app.post('/business', (req, res) => {
     if (req.body && req.body.name) {
@@ -71,9 +72,41 @@ app.post('/business', (req, res) => {
         links: {
             lodging: '/business/' + id
         }
+    });
 });
 
+//Single Specific Business Endpoint
+app.get('/business/:businessID', (req, res, next) => {
+    var businessID = parseInt(req.params.lodgingID);
+    if (business[businessID]) {
+        res.status(200).json(business[businessID]);
+    } else {
+        next();
+    }
 });
+
+// Endpoint to update info on a single Business
+app.put('/business/:businessID', function (req, res, next) {
+    var businessID = parseInt(req.params.businessID);
+    if (business[businessID]) {
+        if (req.body && req.body.name) {
+            lodgings[lodgingID] = req.body;
+            res.status(200).json({
+            links: {
+            lodging: '/lodgings/' + lodgingID
+            }
+        });
+        } else {
+            res.status(400).json({
+            err: "Request needs a JSON body with a name field"
+            });
+        }
+    } else {
+        next();
+    }
+});
+
+
 
 // Reviews
 const review = [
