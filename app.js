@@ -27,8 +27,19 @@ const business =  [
 ]
 
 // Businesses Functions
-app.get('/business', (req, res, next) => {
-    res.status(200).send("Hello world");
+app.get('/business', (req, res) => {
+    res.status(200).json({
+        pageNumber: 1,
+        totalPages: 100,
+        pageSize: 10,
+        totalCount: business.length,
+        businesses: [],
+        links: {
+            nextPage: 'business?page=2',
+            lastPage: '/business?page=100'
+        }
+
+    });
 });
 
 // Reviews
