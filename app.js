@@ -28,17 +28,30 @@ const business =  [
 
 // Businesses Functions
 app.get('/business', (req, res) => {
+    var page = parseInt(req.query.page) || 1;
+    var numPerPage = 10;
+    var lastPage = Math.ceil(lodgings.length / numPerPage);
+    page = page < 1 ? 1 : page;
+    page = page > lastPage ? lastPage : page;
+    var start = (page - 1) * numPerPage;
+    var end = start + numPerPage;
+    var pageBusinesses = lodgings.slice(start, end);
+    var links = {};
+    if (page < lastPage) {
+        links.nextPage = '/business?page=' + (page + 1);
+        links.lastPage = '/business?page=' + lastPage;
+    }
+    if (page > 1) {
+        links.prevPage = '/business?page=' + (page - 1);
+        links.firstPage = '/business?page=1';
+    }
     res.status(200).json({
-        pageNumber: 1,
-        totalPages: 100,
-        pageSize: 10,
+        pageNumber: page,
+        totalPages: lastPage,
+        pageSize: numPerPage,
         totalCount: business.length,
-        businesses: [],
-        links: {
-            nextPage: 'business?page=2',
-            lastPage: '/business?page=100'
-        }
-
+        businesses: pageBusinesses,
+        links: links
     });
 });
 
