@@ -11,7 +11,7 @@ app.listen(port, () => {
 });
 
 
-// Businesses
+// Business collection
 const business =  [
     {
         name: "",
@@ -26,7 +26,7 @@ const business =  [
     }
 ]
 
-// Businesses Functions
+// Businesses API endpoint 
 app.get('/business', (req, res) => {
     var page = parseInt(req.query.page) || 1;
     var numPerPage = 10;
@@ -53,6 +53,26 @@ app.get('/business', (req, res) => {
         businesses: pageBusinesses,
         links: links
     });
+});
+
+app.use(express.json());
+app.post('/business', (req, res) => {
+    if (req.body && req.body.name) {
+        business.push(req.body.name)
+        res.json({"status" : "ok"})
+    } else {
+        res.status(400).json({
+            err: "Request needs a JSON body with a name field"
+        });
+    }
+    var id = business.length - 1;
+    res.status(201).json({
+        id: id,
+        links: {
+            lodging: '/business/' + id
+        }
+});
+
 });
 
 // Reviews
