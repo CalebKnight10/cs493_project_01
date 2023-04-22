@@ -130,8 +130,24 @@ const review = [
 ]
 
 // Reviews Functions
-app.get('/review', (req, res, next) => {
-    res.status(200).send("Hello world");
+
+app.post('/review', jsonParser, (req, res) => {
+    if (req.body && req.body.starRating && req.body.dollarRating) {
+        reviews.push(req.body);
+        res.json({"status": "ok"});
+    } else {
+        res.status(400).json({
+            err: "Request needs a JSON body with a star rating field and dollar rating field"
+        });
+    }
+
+    var id = review.length - 1;
+    res.status(201).json({
+        id: id,
+        links: {
+            review: '/review/' + id
+        }
+    });
 });
 
 // Photos
