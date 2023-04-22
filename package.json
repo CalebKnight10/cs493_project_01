@@ -1,0 +1,22 @@
+{
+  "name": "project_01",
+  "version": "1.0.0",
+  "description": "An example of a RESTful API",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CalebKnight10/cs493_project_01.git"
+  },
+  "author": "Caleb Knight",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CalebKnight10/cs493_project_01/issues"
+  },
+  "homepage": "https://github.com/CalebKnight10/cs493_project_01#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
