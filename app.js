@@ -123,9 +123,9 @@ app.delete(
 // Reviews
 const review = [
     {
-        star: "",
-        price: "", 
-        review: ""
+        star: "3",
+        price: "$$", 
+        review: "Pretty Good, for a Test"
     }
 ]
 
