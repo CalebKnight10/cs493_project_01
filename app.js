@@ -189,7 +189,102 @@ const photo = [
     }
 ]
 
-// Photos Functions
-app.get('/photo', (req, res, next) => {
-    res.status(200).send("Hello world");
+// View all reviews
+app.get('/photo/:photoID/reviews', (req, res, next) => {
+    var photoID = parseInt(req.params.photoID);
+    var page = parseInt(req.query.page) || 1;
+    var numPerPage = 10;
+    var lastPage = Math.ceil(reviews.length / numPerPage);
+    page = page < 1 ? 1 : page;
+    page = page > lastPage ? lastPage : page;
+    var start = (page - 1) * numPerPage;
+    var end = start + numPerPage;
+    var pagereviews = reviews.slice(start, end);
+    var links = {};
+
+    if (page < lastPage) {
+        links.nextPage = '/photo/:photoID/reviews?page=' + (page + 1);
+        links.lastPage = '/photo/:photoID/reviews?page=' + lastPage;
+    }
+    if (page > 1) {
+        links.prevPage = '/photo/:photoID/reviews?page=' + (page - 1);
+        links.firstPage = '/photo/:photoID/reviews?page=1';
+    }  
+    
+    if (photo[photoID]) {
+        res.status(200).json({
+        pageNumber: page,
+        totalPages: lastPage,
+        pageSize: numPerPage,
+        totalCount: reviews.length,
+        reviews: pagereviews[photoID],
+        links: links});
+    } else {
+        next();
+    }
+});
+
+// View all businesses
+app.get('/photo/:photoID/businesses', (req, res, next) => {
+    var photoID = parseInt(req.params.photoID);
+    var page = parseInt(req.query.page) || 1;
+    var numPerPage = 10;
+    var lastPage = Math.ceil(businesses.length / numPerPage);
+    page = page < 1 ? 1 : page;
+    page = page > lastPage ? lastPage : page;
+    var start = (page - 1) * numPerPage;
+    var end = start + numPerPage;
+    var pageBusinesses = businesses.slice(start, end);
+    var links = {};
+
+    if (page < lastPage) {
+        links.nextPage = '/photo/:photoID/businesses?page=' + (page + 1);
+        links.lastPage = '/photo/:photoID/businesses?page=' + lastPage;
+    }
+    if (page > 1) {
+        links.prevPage = '/photo/:photoID/businesses?page=' + (page - 1);
+        links.firstPage = '/photo/:photoID/businesses?page=1';
+    }  
+    
+    if (photo[photoID]) {
+        res.status(200).json({
+        pageNumber: page,
+        totalPages: lastPage,
+        pageSize: numPerPage,
+        totalCount: businesses.length,
+        businesses: pageBusinesses[photoID],
+        links: links});
+    } else {
+        next();
+    }
+});
+
+// View all photos
+app.get('/photo', (req, res) => {
+    var page = parseInt(req.query.page) || 1;
+    var numPerPage = 10;
+    var lastPage = Math.ceil(photo.length / numPerPage);
+    page = page < 1 ? 1 : page;
+    page = page > lastPage ? lastPage : page;
+    var start = (page - 1) * numPerPage;
+    var end = start + numPerPage;
+    var pagephoto = photo.slice(start, end);
+    var links = {};
+    if (page < lastPage) {
+        links.nextPage = '/photo?page=' + (page + 1);
+        links.lastPage = '/photo?page=' + lastPage;
+    }
+    if (page > 1) {
+        links.prevPage = '/photo?page=' + (page - 1);
+        links.firstPage = '/photo?page=1';
+    }  
+    
+    res.status(200).json({
+        pageNumber: page,
+        totalPages: lastPage,
+        pageSize: numPerPage,
+        totalCount: photo.length,
+        photo: pagephoto,
+        links: links
+    });
 });
