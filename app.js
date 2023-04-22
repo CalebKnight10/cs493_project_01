@@ -14,15 +14,15 @@ app.listen(port, () => {
 // Business collection
 const business =  [
     {
-        name: "",
-        address: "",
-        city: "",
-        state: "", 
-        zip: "",
-        phone: "",
-        type: "",
-        email: "",
-        website: ""
+        name: "Test",
+        address: "1234 Test Dr",
+        city: "Prineville",
+        state: "Oregon", 
+        zip: "97754",
+        phone: "541-123-4567",
+        type: "Test",
+        email: "test@gmail.com",
+        website: "www.test.com"
     }
 ]
 
