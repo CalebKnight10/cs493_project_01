@@ -30,12 +30,12 @@ const business =  [
 app.get('/business', (req, res) => {
     var page = parseInt(req.query.page) || 1;
     var numPerPage = 10;
-    var lastPage = Math.ceil(lodgings.length / numPerPage);
+    var lastPage = Math.ceil(business.length / numPerPage);
     page = page < 1 ? 1 : page;
     page = page > lastPage ? lastPage : page;
     var start = (page - 1) * numPerPage;
     var end = start + numPerPage;
-    var pageBusinesses = lodgings.slice(start, end);
+    var pageBusinesses = business.slice(start, end);
     var links = {};
     if (page < lastPage) {
         links.nextPage = '/business?page=' + (page + 1);
