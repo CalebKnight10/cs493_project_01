@@ -308,3 +308,34 @@ app.post('/photo', jsonParser, (req, res) => {
         }
     });
 });
+
+app.put('/photo/:photoID', (req, res, next) => {
+    var photoID = parseInt(req.params.photoID);
+    if (photo[photoID]) {
+        if (req.body && req.body.imageFile) {
+            photo[photoID] = req.body;
+            res.status(200).json({
+                links: {
+                    photo: '/photo/' + photoID
+                }
+        });
+        } else {
+            res.status(400).json({
+                err: "Request needs a JSON body with an Image"
+            });
+        }
+    } else {
+        next();
+    }
+});
+
+// Delete a photo
+app.delete('/photo/:photoID', (req, res, next) => {
+    var photoID = parseInt(req.params.photoID);
+    if (photo[photoID]) {
+        photo[photoID] = null;
+        res.status(204).end();
+    } else {
+        next();
+    }
+});
