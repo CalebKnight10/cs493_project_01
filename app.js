@@ -189,26 +189,26 @@ const photo = [
     }
 ]
 
-// View all reviews
-app.get('/photo/:photoID/reviews', (req, res, next) => {
+// View all reviews (Just use business as example template)
+app.get('/photo/:photoID/review', (req, res, next) => {
     var photoID = parseInt(req.params.photoID);
     var page = parseInt(req.query.page) || 1;
     var numPerPage = 10;
-    var lastPage = Math.ceil(reviews.length / numPerPage);
+    var lastPage = Math.ceil(review.length / numPerPage);
     page = page < 1 ? 1 : page;
     page = page > lastPage ? lastPage : page;
     var start = (page - 1) * numPerPage;
     var end = start + numPerPage;
-    var pagereviews = reviews.slice(start, end);
+    var pagereviews = review.slice(start, end);
     var links = {};
 
     if (page < lastPage) {
-        links.nextPage = '/photo/:photoID/reviews?page=' + (page + 1);
-        links.lastPage = '/photo/:photoID/reviews?page=' + lastPage;
+        links.nextPage = '/photo/:photoID/review?page=' + (page + 1);
+        links.lastPage = '/photo/:photoID/review?page=' + lastPage;
     }
     if (page > 1) {
-        links.prevPage = '/photo/:photoID/reviews?page=' + (page - 1);
-        links.firstPage = '/photo/:photoID/reviews?page=1';
+        links.prevPage = '/photo/:photoID/review?page=' + (page - 1);
+        links.firstPage = '/photo/:photoID/review?page=1';
     }  
     
     if (photo[photoID]) {
@@ -216,7 +216,7 @@ app.get('/photo/:photoID/reviews', (req, res, next) => {
         pageNumber: page,
         totalPages: lastPage,
         pageSize: numPerPage,
-        totalCount: reviews.length,
+        totalCount: review.length,
         reviews: pagereviews[photoID],
         links: links});
     } else {
@@ -225,25 +225,25 @@ app.get('/photo/:photoID/reviews', (req, res, next) => {
 });
 
 // View all businesses
-app.get('/photo/:photoID/businesses', (req, res, next) => {
+app.get('/photo/:photoID/business', (req, res, next) => {
     var photoID = parseInt(req.params.photoID);
     var page = parseInt(req.query.page) || 1;
     var numPerPage = 10;
-    var lastPage = Math.ceil(businesses.length / numPerPage);
+    var lastPage = Math.ceil(business.length / numPerPage);
     page = page < 1 ? 1 : page;
     page = page > lastPage ? lastPage : page;
     var start = (page - 1) * numPerPage;
     var end = start + numPerPage;
-    var pageBusinesses = businesses.slice(start, end);
+    var pageBusinesses = business.slice(start, end);
     var links = {};
 
     if (page < lastPage) {
-        links.nextPage = '/photo/:photoID/businesses?page=' + (page + 1);
-        links.lastPage = '/photo/:photoID/businesses?page=' + lastPage;
+        links.nextPage = '/photo/:photoID/business?page=' + (page + 1);
+        links.lastPage = '/photo/:photoID/business?page=' + lastPage;
     }
     if (page > 1) {
-        links.prevPage = '/photo/:photoID/businesses?page=' + (page - 1);
-        links.firstPage = '/photo/:photoID/businesses?page=1';
+        links.prevPage = '/photo/:photoID/business?page=' + (page - 1);
+        links.firstPage = '/photo/:photoID/business?page=1';
     }  
     
     if (photo[photoID]) {
@@ -251,7 +251,7 @@ app.get('/photo/:photoID/businesses', (req, res, next) => {
         pageNumber: page,
         totalPages: lastPage,
         pageSize: numPerPage,
-        totalCount: businesses.length,
+        totalCount: business.length,
         businesses: pageBusinesses[photoID],
         links: links});
     } else {
@@ -286,5 +286,25 @@ app.get('/photo', (req, res) => {
         totalCount: photo.length,
         photo: pagephoto,
         links: links
+    });
+});
+
+// Photos upload (use review post format)
+app.post('/photo', jsonParser, (req, res) => {
+    if (req.body && req.body.imageFile) {
+        photo.push(req.body);
+        res.json({"status": "ok"});
+    } else {
+        res.status(400).json({
+            err: "Request needs a JSON body with an Image"
+        });
+    }
+
+    var id = photo.length - 1;
+    res.status(201).json({
+        id: id,
+        links: {
+            review: '/photo/' + id
+        }
     });
 });
