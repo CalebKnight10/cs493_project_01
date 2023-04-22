@@ -170,6 +170,17 @@ app.put('/review/:reviewID', (req, res, next) => {
     }
 });
 
+// Delete request for reviews
+app.delete('/review/:reviewID', (req, res, next) => {
+    var reviewID = parseInt(req.params.reviewID);
+    if (review[reviewID]) {
+        review[reviewID] = null;
+        res.status(204).end();
+    } else {
+        next();
+    }
+});
+
 // Photos
 const photo = [
     {
