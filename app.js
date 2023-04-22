@@ -130,7 +130,6 @@ const review = [
 ]
 
 // Reviews Functions
-
 app.post('/review', jsonParser, (req, res) => {
     if (req.body && req.body.starRating && req.body.dollarRating) {
         reviews.push(req.body);
@@ -148,6 +147,27 @@ app.post('/review', jsonParser, (req, res) => {
             review: '/review/' + id
         }
     });
+});
+
+// Put request for reviewing business
+app.put('/review/:reviewID', (req, res, next) => {
+    var reviewID = parseInt(req.params.reviewID);
+    if (review[reviewID]) {
+        if (req.body && req.body.starRating && req.body.dollarRating) {
+            review[reviewID] = req.body;
+            res.status(200).json({
+                links: {
+                    review: '/review/' + reviewID
+                }
+        });
+        } else {
+            res.status(400).json({
+                err: "Request needs a JSON body with a star rating field and dollar rating field"
+            });
+        }
+    } else {
+        next();
+    }
 });
 
 // Photos
