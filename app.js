@@ -184,7 +184,7 @@ app.delete('/review/:reviewID', (req, res, next) => {
 // Photos
 const photo = [
     {
-        file: "test.img",
+        imageFile: "test.img",
         caption: "Test image"
     }
 ]
