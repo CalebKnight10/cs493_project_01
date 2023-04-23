@@ -154,7 +154,7 @@ app.post('/review', jsonParser, (req, res) => {
 app.put('/review/:reviewID', (req, res, next) => {
     var reviewID = parseInt(req.params.reviewID);
     if (review[reviewID]) {
-        if (req.body && req.body.star && req.body.price) {
+        if (req.body && req.body.starRating && req.body.dollarRating) {
             review[reviewID] = req.body;
             res.status(200).json({
                 links: {
