@@ -70,14 +70,14 @@ app.post('/business', (req, res) => {
     res.status(201).json({
         id: id,
         links: {
-            lodging: '/business/' + id
+            business: '/business/' + id
         }
     });
 });
 
 //Single Specific Business Endpoint
 app.get('/business/:businessID', (req, res, next) => {
-    var businessID = parseInt(req.params.lodgingID);
+    var businessID = parseInt(req.params.businessID);
     if (business[businessID]) {
         res.status(200).json(business[businessID]);
     } else {
