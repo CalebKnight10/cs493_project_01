@@ -123,16 +123,17 @@ app.delete(
 // Reviews
 const review = [
     {
-        star: "3",
-        price: "$$", 
+        starRating: "3",
+        dollarRating: "$$", 
         review: "Pretty Good, for a Test"
     }
 ]
 
 // Reviews Functions
+app.use(express.json());
 app.post('/review', jsonParser, (req, res) => {
     if (req.body && req.body.starRating && req.body.dollarRating) {
-        reviews.push(req.body);
+        review.push(req.body);
         res.json({"status": "ok"});
     } else {
         res.status(400).json({
@@ -153,7 +154,7 @@ app.post('/review', jsonParser, (req, res) => {
 app.put('/review/:reviewID', (req, res, next) => {
     var reviewID = parseInt(req.params.reviewID);
     if (review[reviewID]) {
-        if (req.body && req.body.starRating && req.body.dollarRating) {
+        if (req.body && req.body.star && req.body.price) {
             review[reviewID] = req.body;
             res.status(200).json({
                 links: {
@@ -217,7 +218,7 @@ app.get('/photo/:photoID/review', (req, res, next) => {
         totalPages: lastPage,
         pageSize: numPerPage,
         totalCount: review.length,
-        reviews: pagereviews[photoID],
+        review: pagereviews[photoID],
         links: links});
     } else {
         next();
