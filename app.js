@@ -50,7 +50,7 @@ app.get('/business', (req, res) => {
         totalPages: lastPage,
         pageSize: numPerPage,
         totalCount: business.length,
-        businesses: pageBusinesses,
+        business: pageBusinesses,
         links: links
     });
 });
@@ -252,7 +252,7 @@ app.get('/photo/:photoID/business', (req, res, next) => {
         totalPages: lastPage,
         pageSize: numPerPage,
         totalCount: business.length,
-        businesses: pageBusinesses[photoID],
+        business: pageBusinesses[photoID],
         links: links});
     } else {
         next();
