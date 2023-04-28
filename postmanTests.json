@@ -1,0 +1,692 @@
+{
+	"info": {
+		"_postman_id": "t6632358-6h17-1ch8-wc7s-f36ge14h3116",
+		"name": "Project 1 Tests"	
+    },
+	"item": [
+		{
+			"name": "Add business",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create new business\", function () {\r",
+							"    pm.sendRequest({\r",
+							"        url: \"http://localhost:3000/business\",\r",
+							"        method: \"POST\",\r",
+							"        header: {\r",
+							"            \"Content-Type\": \"application/json\"\r",
+							"        },\r",
+							"        body: {\r",
+							"            mode: \"raw\",\r",
+							"            raw: JSON.stringify({\r",
+							"                owner: \"Caleb Knight\",\r",
+							"                name: \"Test LLC\",\r",
+							"                address: \"1234 Dr\",\r",
+							"                city: \"Prineville\",\r",
+							"                state: \"OR\",\r",
+							"                zipCode: \"97754\",\r",
+							"                phoneNumber: \"(541) 123-4567\",\r",
+							"                category: \"Restaurant\",\r",
+							"                subcategory: \"Pizza\",\r",
+							"                website: \"test.com\",\r",
+							"                email: \"cdknight1974@gmail.com\",\r",
+							"                review: [],\r",
+							"                photo: []\r",
+							"            })\r",
+							"        }\r",
+							"    }, function (err, res) {\r",
+							"        pm.expect(err).to.be.null;\r",
+							"        pm.expect(res).to.have.status(200);\r",
+							"        pm.expect(res.json()).to.have.property(\"owner\", \"Caleb Knight\");\r",
+							"        pm.expect(res.json()).to.have.property(\"name\", \"Test LLC\");\r",
+							"        pm.expect(res.json()).to.have.property(\"address\", \"1234 Dr\");\r",
+							"        pm.expect(res.json()).to.have.property(\"city\", \"Prineville\");\r",
+							"        pm.expect(res.json()).to.have.property(\"state\", \"OR\");\r",
+							"        pm.expect(res.json()).to.have.property(\"zipCode\", \"97754\");\r",
+							"        pm.expect(res.json()).to.have.property(\"phoneNumber\", \"(541) 123-4567\");\r",
+							"        pm.expect(res.json()).to.have.property(\"category\", \"Restaurant\");\r",
+							"        pm.expect(res.json()).to.have.property(\"subcategory\", \"Pizza\");\r",
+							"        pm.expect(res.json()).to.have.property(\"website\", \"test.com\");\r",
+							"        pm.expect(res.json()).to.have.property(\"email\", \"cdknight1974@gmail.com\");\r",
+							"        pm.expect(res.json()).to.have.property(\"review\").that.is.an(\"array\");\r",
+							"        pm.expect(res.json()).to.have.property(\"photo\").that.is.an(\"array\");\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/business",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"business"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get business",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get business info\", function () {\r",
+							"    pm.sendRequest({\r",
+							"        url: \"http://localhost:3000/business\",\r",
+							"        method: \"POST\",\r",
+							"        header: {\r",
+							"            \"Content-Type\": \"application/json\"\r",
+							"        },\r",
+							"        body: {\r",
+							"            mode: \"raw\",\r",
+							"            raw: JSON.stringify({\r",
+							"                owner: \"Caleb Knight\",\r",
+							"                name: \"Test LLC\",\r",
+							"                address: \"1234 Dr\",\r",
+							"                city: \"Prineville\",\r",
+							"                state: \"OR\",\r",
+							"                zipCode: \"97754\",\r",
+							"                phoneNumber: \"(541) 123-4567\",\r",
+							"                category: \"Restaurant\",\r",
+							"                subcategory: \"Pizza\",\r",
+							"                website: \"test.com\",\r",
+							"                email: \"cdknight1974@gmail.com\",\r",
+							"                review: [],\r",
+							"                photo: []\r",
+							"            })\r",
+							"        }\r",
+							"    }, function (err, res) {\r",
+							"        pm.expect(err).to.be.null;\r",
+							"        pm.expect(res).to.have.status(200);\r",
+							"        const business = res.json();\r",
+							"        pm.expect(business).to.have.property(\"owner\", \"Caleb Knight\");\r",
+							"        pm.expect(business).to.have.property(\"name\", \"Test LLC\");\r",
+							"        pm.expect(business).to.have.property(\"address\", \"1234 Dr\");\r",
+							"        pm.expect(business).to.have.property(\"city\", \"Prineville\");\r",
+							"        pm.expect(business).to.have.property(\"state\", \"OR\");\r",
+							"        pm.expect(business).to.have.property(\"zipCode\", \"97754\");\r",
+							"        pm.expect(business).to.have.property(\"phoneNumber\", \"(541) 123-4567\");\r",
+							"        pm.expect(business).to.have.property(\"category\", \"Restaurant\");\r",
+							"        pm.expect(business).to.have.property(\"subcategory\", \"Pizza\");\r",
+							"        pm.expect(business).to.have.property(\"website\", \"test.com\");\r",
+							"        pm.expect(business).to.have.property(\"email\", \"cdknight1974@gmail.com\");\r",
+							"        pm.expect(business).to.have.property(\"review\").that.is.an(\"array\");\r",
+							"        pm.expect(business).to.have.property(\"photo\").that.is.an(\"array\");\r",
+							"\r",
+							"        pm.sendRequest({\r",
+							"            url: `http://localhost:3000/business/${business.businessId}`,\r",
+							"            method: \"GET\"\r",
+							"        }, function (err, res) {\r",
+							"            pm.expect(err).to.be.null;\r",
+							"            pm.expect(res).to.have.status(200);\r",
+							"            pm.expect(res.json()).to.deep.equal(business);\r",
+							"        });\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/business",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"business"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Update business info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update an existing business\", function () {\r",
+							"    pm.sendRequest({\r",
+							"        url: \"http://localhost:3000/business\",\r",
+							"        method: \"POST\",\r",
+							"        header: {\r",
+							"            \"Content-Type\": \"application/json\"\r",
+							"        },\r",
+							"        body: {\r",
+							"            mode: \"raw\",\r",
+							"            raw: JSON.stringify({\r",
+							"                owner: \"Caleb Knight\",\r",
+							"                name: \"Test LLC\",\r",
+							"                address: \"1234 Dr\",\r",
+							"                city: \"Prineville\",\r",
+							"                state: \"OR\",\r",
+							"                zipCode: \"97754\",\r",
+							"                phoneNumber: \"(541) 123-4567\",\r",
+							"                category: \"Restaurant\",\r",
+							"                subcategory: \"Pizza\",\r",
+							"                website: \"test.com\",\r",
+							"                email: \"cdknight1974@gmail.com\",\r",
+							"                review: [],\r",
+							"                photo: []\r",
+							"            })\r",
+							"        }\r",
+							"    }, function (err, res) {\r",
+							"        pm.expect(err).to.be.null;\r",
+							"        pm.expect(res).to.have.status(200);\r",
+							"        pm.expect(res.json()).to.have.property(\"businessId\");\r",
+							"        var businessId = res.json().businessId;\r",
+							"\r",
+							"        pm.sendRequest({\r",
+							"            url: \"http://localhost:3000/business/\" + businessId,\r",
+							"            method: \"PUT\",\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            },\r",
+							"            body: {\r",
+							"                mode: \"raw\",\r",
+							"                raw: JSON.stringify({\r",
+							"                    owner: \"Caleb Knight\",\r",
+							"                    name: \"New Test LLC\",\r",
+							"                    address: \"1234 Dr\",\r",
+							"                    city: \"Prineville\",\r",
+							"                    state: \"OR\",\r",
+							"                    zipCode: \"97754\",\r",
+							"                    phoneNumber: \"(541) 123-4567\",\r",
+							"                    category: \"Restaurant\",\r",
+							"                    subcategory: \"Pizza\",\r",
+							"                    website: \"test.com\",\r",
+							"                    email: \"cdknight1974@gmail.com\",\r",
+							"                    review: [],\r",
+							"                    photo: []\r",
+							"                })\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            pm.expect(err).to.be.null;\r",
+							"            pm.expect(res).to.have.status(200);\r",
+							"            pm.expect(res.json()).to.have.property(\"name\", \"New Test LLC\");\r",
+							"        });\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/business",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"business"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a business",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete business\", function () {\r",
+							"    pm.sendRequest({\r",
+							"        url: \"http://localhost:3000/business\",\r",
+							"        method: \"POST\",\r",
+							"        header: {\r",
+							"            \"Content-Type\": \"application/json\"\r",
+							"        },\r",
+							"        body: {\r",
+							"            mode: \"raw\",\r",
+							"            raw: JSON.stringify({\r",
+							"                owner: \"Caleb Knight\",\r",
+							"                name: \"Test LLC\",\r",
+							"                address: \"1234 Dr\",\r",
+							"                city: \"Prineville\",\r",
+							"                state: \"OR\",\r",
+							"                zipCode: \"97754\",\r",
+							"                phoneNumber: \"(541) 123-4567\",\r",
+							"                category: \"Restaurant\",\r",
+							"                subcategory: \"Pizza\",\r",
+							"                website: \"test.com\",\r",
+							"                email: \"cdknight1974@gmail.com\",\r",
+							"                review: [],\r",
+							"                photo: []\r",
+							"            })\r",
+							"        }\r",
+							"    }, function (err, res) {\r",
+							"        pm.expect(err).to.be.null;\r",
+							"        pm.expect(res).to.have.status(200);\r",
+							"        const business = res.json();\r",
+							"        pm.expect(business).to.have.property(\"owner\", \"Caleb Knight\");\r",
+							"        pm.expect(business).to.have.property(\"name\", \"Test LLC\");\r",
+							"        pm.expect(business).to.have.property(\"address\", \"1234 Dr\");\r",
+							"        pm.expect(business).to.have.property(\"city\", \"Prineville\");\r",
+							"        pm.expect(business).to.have.property(\"state\", \"OR\");\r",
+							"        pm.expect(business).to.have.property(\"zipCode\", \"97754\");\r",
+							"        pm.expect(business).to.have.property(\"phoneNumber\", \"(541) 123-4567\");\r",
+							"        pm.expect(business).to.have.property(\"category\", \"Restaurant\");\r",
+							"        pm.expect(business).to.have.property(\"subcategory\", \"Pizza\");\r",
+							"        pm.expect(business).to.have.property(\"website\", \"test.com\");\r",
+							"        pm.expect(business).to.have.property(\"email\", \"cdknight1974@gmail.com\");\r",
+							"        pm.expect(business).to.have.property(\"review\").that.is.an(\"array\");\r",
+							"        pm.expect(business).to.have.property(\"photo\").that.is.an(\"array\");\r",
+							"\r",
+							"        pm.sendRequest({\r",
+							"            url: `http://localhost:3000/business/${business.businessId}`,\r",
+							"            method: \"DELETE\"\r",
+							"        }, function (err, res) {\r",
+							"            pm.expect(err).to.be.null;\r",
+							"            pm.expect(res).to.have.status(200);\r",
+							"            pm.expect(res.text()).to.equal(\"Business deleted\");\r",
+							"        });\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/business",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"business"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Add a review to a business\", function () {\r",
+							"    pm.sendRequest({\r",
+							"        url: \"http://localhost:3000/business\",\r",
+							"        method: \"POST\",\r",
+							"        header: {\r",
+							"            \"Content-Type\": \"application/json\"\r",
+							"        },\r",
+							"        body: {\r",
+							"            mode: \"raw\",\r",
+							"            raw: JSON.stringify({\r",
+							"                owner: \"Caleb Knight\",\r",
+							"                name: \"Test LLC\",\r",
+							"                address: \"1234 Dr\",\r",
+							"                city: \"Prineville\",\r",
+							"                state: \"OR\",\r",
+							"                zipCode: \"97754\",\r",
+							"                phoneNumber: \"(541) 123-4567\",\r",
+							"                category: \"Restaurant\",\r",
+							"                subcategory: \"Pizza\",\r",
+							"                website: \"test.com\",\r",
+							"                email: \"cdknight1974@gmail.com\",\r",
+							"                review: [],\r",
+							"                photo: []\r",
+							"            })\r",
+							"        }\r",
+							"    }, function (err, res) {\r",
+							"        pm.expect(err).to.be.null;\r",
+							"        pm.expect(res).to.have.status(200);\r",
+							"        pm.expect(res.json()).to.have.property(\"businessId\");\r",
+							"        var businessId = res.json().businessId;\r",
+							"\r",
+							"        pm.sendRequest({\r",
+							"            url: \"http://localhost:3000/business/\" + businessId + \"/review\",\r",
+							"            method: \"POST\",\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            },\r",
+							"            body: {\r",
+							"                mode: \"raw\",\r",
+							"                raw: JSON.stringify({\r",
+							"                    rating: 2,\r",
+							"                    budget: \"$$\",\r",
+							"                    reviewText: \"Meh service, for a test\"\r",
+							"                })\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            pm.expect(err).to.be.null;\r",
+							"            pm.expect(res).to.have.status(200);\r",
+							"            pm.expect(res.json()).to.have.property(\"rating\", 2);\r",
+							"            pm.expect(res.json()).to.have.property(\"budget\", \"$$\");\r",
+							"            pm.expect(res.json()).to.have.property(\"reviewText\", \"Meh service, for a test\");\r",
+							"        });\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/business",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"business"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get review info\", function () {\r",
+							"    pm.sendRequest({\r",
+							"        url: \"http://localhost:3000/business\",\r",
+							"        method: \"POST\",\r",
+							"        header: {\r",
+							"            \"Content-Type\": \"application/json\"\r",
+							"        },\r",
+							"        body: {\r",
+							"            mode: \"raw\",\r",
+							"            raw: JSON.stringify({\r",
+							"                owner: \"Caleb Knight\",\r",
+							"                name: \"Test LLC\",\r",
+							"                address: \"1234 Dr\",\r",
+							"                city: \"Prineville\",\r",
+							"                state: \"OR\",\r",
+							"                zipCode: \"97754\",\r",
+							"                phoneNumber: \"(541) 123-4567\",\r",
+							"                category: \"Restaurant\",\r",
+							"                subcategory: \"Pizza\",\r",
+							"                website: \"test.com\",\r",
+							"                email: \"cdknight1974@gmail.com\",\r",
+							"                review: [],\r",
+							"                photo: []\r",
+							"            })\r",
+							"        }\r",
+							"    }, function (err, res) {\r",
+							"        pm.expect(err).to.be.null;\r",
+							"        pm.expect(res).to.have.status(200);\r",
+							"        pm.expect(res.json()).to.have.property(\"businessId\");\r",
+							"        var businessId = res.json().businessId;\r",
+							"\r",
+							"        pm.sendRequest({\r",
+							"            url: \"http://localhost:3000/business/\" + businessId + \"/review\",\r",
+							"            method: \"POST\",\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            },\r",
+							"            body: {\r",
+							"                mode: \"raw\",\r",
+							"                raw: JSON.stringify({\r",
+							"                    rating: 4,\r",
+							"                    budget: \"$$$\",\r",
+							"                    reviewText: \"Great service!\"\r",
+							"                })\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            pm.expect(err).to.be.null;\r",
+							"            pm.expect(res).to.have.status(200);\r",
+							"            pm.expect(res.json()).to.have.property(\"rating\", 4);\r",
+							"            pm.expect(res.json()).to.have.property(\"budget\", \"$$$\");\r",
+							"            pm.expect(res.json()).to.have.property(\"reviewText\", \"Great service!\");\r",
+							"\r",
+							"            pm.sendRequest({\r",
+							"                url: \"http://localhost:3000/business/\" + businessId + \"/review\",\r",
+							"                method: \"GET\",\r",
+							"                header: {\r",
+							"                    \"Content-Type\": \"application/json\"\r",
+							"                }\r",
+							"            }, function (err, res) {\r",
+							"                pm.expect(err).to.be.null;\r",
+							"                pm.expect(res).to.have.status(200);\r",
+							"                pm.expect(res.json()).to.be.an('array');\r",
+							"                pm.expect(res.json()[0]).to.have.property(\"rating\", 4);\r",
+							"                pm.expect(res.json()[0]).to.have.property(\"budget\", \"$$$\");\r",
+							"                pm.expect(res.json()[0]).to.have.property(\"reviewText\", \"Great service!\");\r",
+							"            });\r",
+							"        });\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/business",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"business"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add photo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Add photo\", function () {\r",
+							"    pm.sendRequest({\r",
+							"        url: \"http://localhost:3000/business\",\r",
+							"        method: \"POST\",\r",
+							"        header: {\r",
+							"            \"Content-Type\": \"application/json\"\r",
+							"        },\r",
+							"        body: {\r",
+							"            mode: \"raw\",\r",
+							"            raw: JSON.stringify({\r",
+							"                owner: \"Caleb Knight\",\r",
+							"                name: \"Test LLC\",\r",
+							"                address: \"1234 Dr\",\r",
+							"                city: \"Prineville\",\r",
+							"                state: \"OR\",\r",
+							"                zipCode: \"97754\",\r",
+							"                phoneNumber: \"(541) 123-4567\",\r",
+							"                category: \"Restaurant\",\r",
+							"                subcategory: \"Pizza\",\r",
+							"                website: \"test.com\",\r",
+							"                email: \"cdknight1974@gmail.com\",\r",
+							"                review: [],\r",
+							"                photo: []\r",
+							"            })\r",
+							"        }\r",
+							"    }, function (err, res) {\r",
+							"        pm.expect(err).to.be.null;\r",
+							"        pm.expect(res).to.have.status(200);\r",
+							"        pm.expect(res.json()).to.have.property(\"businessId\");\r",
+							"        var businessId = res.json().businessId;\r",
+							"\r",
+							"        pm.sendRequest({\r",
+							"            url: \"http://localhost:3000/business/\" + businessId + \"/photo\",\r",
+							"            method: \"POST\",\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            },\r",
+							"            body: {\r",
+							"                mode: \"raw\",\r",
+							"                raw: JSON.stringify({\r",
+							"                    photoURL: \"test.img\",\r",
+							"                    caption: \"Very Nice\",\r",
+							"                })\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            pm.expect(err).to.be.null;\r",
+							"            pm.expect(res).to.have.status(200);\r",
+							"            pm.expect(res.json()).to.have.property(\"photoURL\", \"test.img\");\r",
+							"            pm.expect(res.json()).to.have.property(\"caption\", \"Very Nice\");\r",
+							"        });\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/business",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"business"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get photo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get photo info\", function () {\r",
+							"    pm.sendRequest({\r",
+							"        url: \"http://localhost:3000/business\",\r",
+							"        method: \"POST\",\r",
+							"        header: {\r",
+							"            \"Content-Type\": \"application/json\"\r",
+							"        },\r",
+							"        body: {\r",
+							"            mode: \"raw\",\r",
+							"            raw: JSON.stringify({\r",
+							"                owner: \"Caleb Knight\",\r",
+							"                name: \"Test LLC\",\r",
+							"                address: \"1234 Dr\",\r",
+							"                city: \"Prineville\",\r",
+							"                state: \"OR\",\r",
+							"                zipCode: \"97754\",\r",
+							"                phoneNumber: \"(541) 123-4567\",\r",
+							"                category: \"Restaurant\",\r",
+							"                subcategory: \"Pizza\",\r",
+							"                website: \"test.com\",\r",
+							"                email: \"cdknight1974@gmail.com\",\r",
+							"                review: [],\r",
+							"                photo: []\r",
+							"            })\r",
+							"        }\r",
+							"    }, function (err, res) {\r",
+							"        pm.expect(err).to.be.null;\r",
+							"        pm.expect(res).to.have.status(200);\r",
+							"        pm.expect(res.json()).to.have.property(\"businessId\");\r",
+							"        var businessId = res.json().businessId;\r",
+							"\r",
+							"        pm.sendRequest({\r",
+							"            url: \"http://localhost:3000/business/\" + businessId + \"/photo\",\r",
+							"            method: \"POST\",\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            },\r",
+							"            body: {\r",
+							"                mode: \"raw\",\r",
+							"                raw: JSON.stringify({\r",
+							"                    photoURL: \"test.img\",\r",
+							"                    caption: \"Very Nice\",\r",
+							"                })\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            pm.expect(err).to.be.null;\r",
+							"            pm.expect(res).to.have.status(200);\r",
+							"            pm.expect(res.json()).to.have.property(\"photoURL\", \"test.img\");\r",
+							"            pm.expect(res.json()).to.have.property(\"caption\", \"Very Nice\");\r",
+							"\r",
+							"            pm.sendRequest({\r",
+							"                url: \"http://localhost:3000/business/\" + businessId + \"/photo\",\r",
+							"                method: \"GET\",\r",
+							"                header: {\r",
+							"                    \"Content-Type\": \"application/json\"\r",
+							"                }\r",
+							"            }, function (err, res) {\r",
+							"                pm.expect(err).to.be.null;\r",
+							"                pm.expect(res).to.have.status(200);\r",
+							"                pm.expect(res.json()[0]).to.have.property(\"photoURL\", \"test.img\");\r",
+							"                pm.expect(res.json()[0]).to.have.property(\"caption\", \"Very Nice\");\r",
+							"            });\r",
+							"        });\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}}],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/business",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"business"
+					]}},
+			"response": []
+		}
+    ]
+}
